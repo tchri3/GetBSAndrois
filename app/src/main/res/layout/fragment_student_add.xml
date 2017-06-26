@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nati.aviran.getbs.MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Student"
+        android:textSize="20sp"
+        android:id="@+id/Message1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Name:"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/mainNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID:"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+
+        <EditText
+            android:id="@+id/mainIdTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone:"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+
+        <EditText
+            android:id="@+id/mainPhoneTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address:"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+
+        <EditText
+            android:id="@+id/AddressEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/strow_cb12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:focusable="false"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="checked"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birth time:"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_margin="10dp"/>
+            <nati.aviran.getbs.MyTimePicker
+                android:id="@+id/frag_input_time1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_margin="10dp"
+                android:inputType="none"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birth date:"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+        <nati.aviran.getbs.MyDatePicker
+            android:id="@+id/frag_input_date1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:layout_margin="10dp"
+            android:inputType="none"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/mainSaveBtn"
+            android:layout_width="1dp"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:onClick="btnListener"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/mainCancelBtn"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="btnListener"/>
+        <Button
+            android:id="@+id/mainDelBtn"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:text="DELETE"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:onClick="btnListener"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

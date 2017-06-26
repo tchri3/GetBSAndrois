@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/darker_gray"
+        android:cropToPadding="false"
+        android:scaleType="center"
+        app:srcCompat="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Email:"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/loginEmailTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Password:"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/loginPasswordTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+    <Button
+        android:id="@+id/loginInBtn"
+        android:layout_width="match_parent"
+        android:layout_margin="0dp"
+        android:layout_height="wrap_content"
+        android:text="sign in"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:onClick="btnListener"
+        android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/mainSaveBtn"
+            android:layout_width="1dp"
+            android:layout_margin="0dp"
+            android:layout_height="wrap_content"
+            android:text="sign up as parent"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:onClick="btnListener"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/mainCancelBtn"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:text="sign up as babissiter"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:onClick="btnListener"/>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
