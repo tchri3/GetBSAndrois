@@ -80,14 +80,25 @@ public class LoginFragment extends Fragment  {
         MainActivity.CurrentFragment="login";
 
         Button signin= (Button)v.findViewById(R.id.loginInBtn);
+        Button signupBS= (Button)v.findViewById(R.id.loginSignupBabysitterBtn);
 
         View.OnClickListener click = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+              //  mListener.onFragmentInteraction(1);
+                mListener.onFragmentInteraction(true);
             }
         };
 
+        View.OnClickListener signupBSClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  mListener.onFragmentInteraction(1);
+                mListener.onFragmentInteractionSignUp();
+            }
+        };
 
+        signupBS.setOnClickListener(signupBSClick);
         signin.setOnClickListener(click);
 
         return v;
@@ -270,5 +281,6 @@ public class LoginFragment extends Fragment  {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(boolean bool);
+        void onFragmentInteractionSignUp();
     }
 }

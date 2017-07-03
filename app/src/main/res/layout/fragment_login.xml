@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@android:color/darker_gray"
+        android:background="@color/common_google_signin_btn_text_dark_default"
         android:cropToPadding="false"
         android:scaleType="center"
-        app:srcCompat="@drawable/logo" />
+        android:src="@drawable/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +78,7 @@
 
 
         <Button
-            android:id="@+id/mainSaveBtn"
+            android:id="@+id/loginSignupParentBtn"
             android:layout_width="1dp"
             android:layout_margin="0dp"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:onClick="btnListener"
             android:layout_weight="1"/>
         <Button
-            android:id="@+id/mainCancelBtn"
+            android:id="@+id/loginSignupBabysitterBtn"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:text="sign up as babissiter"

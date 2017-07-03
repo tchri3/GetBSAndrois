@@ -7,7 +7,7 @@
         android:icon="@android:drawable/ic_menu_add"
         android:showAsAction="ifRoom"
         android:title="add"
-        app:showAsAction="ifRoom" />
+        />
 
     <item
         android:id="@+id/main_edit"
@@ -16,7 +16,7 @@
         android:title="edit"
 
         android:visible="false"
-        app:showAsAction="ifRoom" />
+       />
 
 
 </menu>

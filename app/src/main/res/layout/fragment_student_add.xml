@@ -95,45 +95,45 @@
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <CheckBox
-                android:id="@+id/strow_cb12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:scaleX="1.5"
-                android:scaleY="1.5"
-                android:focusable="false"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="checked"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:layout_margin="10dp"/>
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/strow_cb12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:focusable="false"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="checked"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birth time:"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+        <nati.aviran.getbs.MyTimePicker
+            android:id="@+id/frag_input_time1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Birth time:"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:layout_margin="10dp"/>
-            <nati.aviran.getbs.MyTimePicker
-                android:id="@+id/frag_input_time1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="30dp"
-                android:layout_margin="10dp"
-                android:inputType="none"/>
-        </LinearLayout>
+            android:textSize="30dp"
+            android:layout_margin="10dp"
+            android:inputType="none"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

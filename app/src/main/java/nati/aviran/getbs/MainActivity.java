@@ -118,6 +118,8 @@ public class MainActivity extends Activity
 
     }
 
+
+
     @Override
     public void onFragmentInteraction(boolean bool) {
         CurrentFragment="List";
@@ -132,5 +134,18 @@ public class MainActivity extends Activity
     @Override
     public void onFragmentInteraction(Student str) {
 
+    }
+
+@Override
+    public void onFragmentInteractionSignUp() {
+        StudentAdd sa = StudentAdd.newInstance(null);
+        this.CurrentFragment="add";
+        FragmentTransaction tran = getFragmentManager().beginTransaction();
+        tran.replace(R.id.main_container,sa);
+        tran.addToBackStack("");
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        tran.commit();
     }
 }
