@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.net.Uri;
 
 import nati.aviran.getbs.model.Model;
 import nati.aviran.getbs.model.Student;
@@ -71,7 +70,7 @@ public class StudentDetailsFragment extends Fragment {
         if (item.getItemId() == R.id.main_edit) {
             MainActivity.CurrentFragment="Edit";
             //String id = ((TextView) findViewById(R.id.detId)).toString();
-            StudentAdd s = StudentAdd.newInstance(id);
+            AddBabySitterFragment s = AddBabySitterFragment.newInstance(id);
             ;
             FragmentTransaction tran3 = getFragmentManager().beginTransaction();
             tran3.replace(R.id.main_container, s);

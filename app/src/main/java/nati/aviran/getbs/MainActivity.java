@@ -1,24 +1,18 @@
 package nati.aviran.getbs;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
 
 
-import nati.aviran.getbs.model.Model;
 import nati.aviran.getbs.model.Student;
-
-import static nati.aviran.getbs.R.id.detId;
 
 
 public class MainActivity extends Activity
-        implements StudentListFragment.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener,StudentAdd.OnFragmentInteractionListener ,StudentDetailsFragment.OnFragmentInteractionListener{
+        implements StudentListFragment.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener,AddBabySitterFragment.OnFragmentInteractionListener ,StudentDetailsFragment.OnFragmentInteractionListener{
     public static  String CurrentFragment;
 
     //  FragmentTransaction tran =  getFragmentManager().beginTransaction();
@@ -53,7 +47,7 @@ public class MainActivity extends Activity
         int itemId = item.getItemId();
         switch (itemId){
             case R.id.main_add:
-                StudentAdd sa = StudentAdd.newInstance(null);
+                AddBabySitterFragment sa = AddBabySitterFragment.newInstance(null);
                 this.CurrentFragment="add";
                 FragmentTransaction tran = getFragmentManager().beginTransaction();
                 tran.replace(R.id.main_container,sa);
@@ -84,7 +78,7 @@ public class MainActivity extends Activity
             case R.id.main_edit:
             {
                 String id =((TextView)findViewById(R.id.detId)).toString();
-                StudentAdd s= StudentAdd.newInstance(id);
+                AddBabySitterFragment s= AddBabySitterFragment.newInstance(id);
                 FragmentTransaction tran3 = getFragmentManager().beginTransaction();
                 //tran3.
                 tran3.replace(R.id.main_container,s);
@@ -138,7 +132,7 @@ public class MainActivity extends Activity
 
 @Override
     public void onFragmentInteractionSignUp() {
-        StudentAdd sa = StudentAdd.newInstance(null);
+        AddBabySitterFragment sa = AddBabySitterFragment.newInstance(null);
         this.CurrentFragment="add";
         FragmentTransaction tran = getFragmentManager().beginTransaction();
         tran.replace(R.id.main_container,sa);

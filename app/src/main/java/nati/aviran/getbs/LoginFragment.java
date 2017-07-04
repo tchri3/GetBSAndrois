@@ -48,7 +48,7 @@ public class LoginFragment extends Fragment  {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment StudentAdd.
+     * @return A new instance of fragment AddBabySitterFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static LoginFragment newInstance() {
@@ -103,7 +103,7 @@ public class LoginFragment extends Fragment  {
 
         return v;
         /*
-        final View v =inflater.inflate(R.layout.fragment_student_add, container, false);
+        final View v =inflater.inflate(R.layout.fragment_add_babysitter, container, false);
         Button save= (Button)v.findViewById(R.id.mainSaveBtn);
         Button cel=(Button)v.findViewById(R.id.mainCancelBtn);
         Log.d("TAG","Create view");

@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "906589265386",
+    "firebase_url": "https://getbsfinal.firebaseio.com",
+    "project_id": "getbsfinal",
+    "storage_bucket": "getbsfinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906589265386:android:b4e73566399dfa12",
+        "android_client_info": {
+          "package_name": "nati.aviran.getbs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906589265386-d2si7fc57a1jmqfui3p8lr6r6a67n9sh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nati.aviran.getbs",
+            "certificate_hash": "f0680f426fa5fbab865ae9b4eb22916c4312b803"
+          }
+        },
+        {
+          "client_id": "906589265386-7543lltasfnptr3au75qeokvcf0rng7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9Ypg9sATra2ICB-0BUhtdmeW2iTz-xMo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906589265386-a7mb3k0k370mporbf1nktbvb8gl5r9ov.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "AviranNati.getBS"
+              }
+            },
+            {
+              "client_id": "906589265386-7543lltasfnptr3au75qeokvcf0rng7d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

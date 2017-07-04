@@ -7,7 +7,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
-import android.util.TimeFormatException;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,12 +23,12 @@ import nati.aviran.getbs.model.Student;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link StudentAdd.OnFragmentInteractionListener} interface
+ * {@link AddBabySitterFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link StudentAdd#newInstance} factory method to
+ * Use the {@link AddBabySitterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudentAdd extends Fragment  {
+public class AddBabySitterFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -41,7 +40,7 @@ public class StudentAdd extends Fragment  {
 
     private OnFragmentInteractionListener mListener;
 
-    public StudentAdd() {
+    public AddBabySitterFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +48,11 @@ public class StudentAdd extends Fragment  {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment StudentAdd.
+     * @return A new instance of fragment AddBabySitterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StudentAdd newInstance(String id) {
-        StudentAdd fragment = new StudentAdd();
+    public static AddBabySitterFragment newInstance(String id) {
+        AddBabySitterFragment fragment = new AddBabySitterFragment();
         Bundle args = new Bundle();
         args.putString(ID,id);
         fragment.setArguments(args);
@@ -75,11 +74,11 @@ public class StudentAdd extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View v =inflater.inflate(R.layout.fragment_student_add, container, false);
+        final View v =inflater.inflate(R.layout.fragment_add_babysitter, container, false);
         Button save= (Button)v.findViewById(R.id.mainSaveBtn);
         Button cel=(Button)v.findViewById(R.id.mainCancelBtn);
         Log.d("TAG","Create view");
-
+/*
           EditText nameEt = (EditText) v.findViewById(R.id.mainNameTv);
          EditText idEt= (EditText) v.findViewById(R.id.mainIdTv);
          EditText phone= (EditText) v.findViewById(R.id.mainPhoneTv);
@@ -189,6 +188,7 @@ public class StudentAdd extends Fragment  {
         remove.setOnClickListener(click);
         save.setOnClickListener(click);
         cel.setOnClickListener(click);
+        */
         return v;
     }
 
