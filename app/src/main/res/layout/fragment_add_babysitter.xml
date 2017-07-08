@@ -24,7 +24,7 @@
         android:gravity="center"
         android:text="Add BabySitter"
         android:textSize="25sp"
-        android:id="@+id/Message1"/>
+        android:id="@+id/title"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:src="@drawable/avatar"
-                android:id="@+id/mainImageView"
+                android:id="@+id/bsImageView"
                 android:layout_width="200dp"
                 android:layout_height="200dp" />
             <ProgressBar
@@ -229,7 +229,7 @@
 
 
         <Button
-            android:id="@+id/mainSaveBtn"
+            android:id="@+id/addBSitterAddbtn"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -239,7 +239,7 @@
             android:onClick="btnListener"
             android:text="ADD" />
         <Button
-            android:id="@+id/mainCancelBtn"
+            android:id="@+id/addBSitterCancelbtn"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:text="CANCEL"
@@ -263,6 +263,18 @@
 
 
     </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text=""
+                android:textSize="15sp"
+                android:id="@+id/errorMessage"/>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

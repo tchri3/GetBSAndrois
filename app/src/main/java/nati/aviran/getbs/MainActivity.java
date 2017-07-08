@@ -12,7 +12,7 @@ import nati.aviran.getbs.model.Student;
 
 
 public class MainActivity extends Activity
-        implements StudentListFragment.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener,AddBabySitterFragment.OnFragmentInteractionListener ,StudentDetailsFragment.OnFragmentInteractionListener{
+        implements AddParentFragment.OnFragmentInteractionListener, StudentListFragment.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener,AddBabySitterFragment.OnFragmentInteractionListener ,StudentDetailsFragment.OnFragmentInteractionListener{
     public static  String CurrentFragment;
 
     //  FragmentTransaction tran =  getFragmentManager().beginTransaction();
@@ -48,7 +48,7 @@ public class MainActivity extends Activity
         switch (itemId){
             case R.id.main_add:
                 AddBabySitterFragment sa = AddBabySitterFragment.newInstance(null);
-                this.CurrentFragment="add";
+                this.CurrentFragment="addBS";
                 FragmentTransaction tran = getFragmentManager().beginTransaction();
                 tran.replace(R.id.main_container,sa);
                 tran.addToBackStack("");
@@ -56,19 +56,14 @@ public class MainActivity extends Activity
                 getActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
             case android.R.id.home:
-                if(this.CurrentFragment.equals("StudentDetails")||this.CurrentFragment.equals("add"))
+/*
+                if(this.CurrentFragment.equals("login"))
+                {
                     getActionBar().setDisplayHomeAsUpEnabled(false);
 
-                onBackPressed();
-                /*
-                FragmentTransaction tran1 = getFragmentManager().beginTransaction();
-                if(CurrentFragment.equals("Add")||CurrentFragment.equals("Details")) {
-                    StudentListFragment sa1 = StudentListFragment.newInstance().newInstance();
+                }else {
 
-                    tran1.replace(R.id.main_container, sa1);
-                    tran1.addToBackStack("");
-                    getActionBar().setDisplayHomeAsUpEnabled(false);
-                    tran1.commit();
+                    onBackPressed();
                 }*/
 
                 break;
@@ -116,13 +111,23 @@ public class MainActivity extends Activity
 
     @Override
     public void onFragmentInteraction(boolean bool) {
+        Log.d("TAG","onFragmentInteraction login ");
+        CurrentFragment = "login";
+        LoginFragment loginFragment = LoginFragment.newInstance();
+        FragmentTransaction tran = getFragmentManager().beginTransaction() ;
+        tran.replace(R.id.main_container, loginFragment);
+        tran.commit();
+        getActionBar().setDisplayHomeAsUpEnabled(false);
+
+
+        /*
         CurrentFragment="List";
         StudentListFragment listFragment = StudentListFragment.newInstance();
         FragmentTransaction tran = getFragmentManager().beginTransaction() ;
         tran.replace(R.id.main_container,listFragment);
         tran.commit();
         getActionBar().setDisplayHomeAsUpEnabled(false);
-
+*/
     }
 
     @Override
@@ -131,15 +136,28 @@ public class MainActivity extends Activity
     }
 
 @Override
-    public void onFragmentInteractionSignUp() {
+    public void onFragmentInteractionSignUp(boolean isBs) {
+    if(isBs)
+    {
         AddBabySitterFragment sa = AddBabySitterFragment.newInstance(null);
-        this.CurrentFragment="add";
+        this.CurrentFragment="addBS";
         FragmentTransaction tran = getFragmentManager().beginTransaction();
         tran.replace(R.id.main_container,sa);
         tran.addToBackStack("");
+        tran.commit();
 
+    }else
+    {
+        AddParentFragment sa = AddParentFragment.newInstance(null);
+        this.CurrentFragment="addParent";
+        FragmentTransaction tran = getFragmentManager().beginTransaction();
+        tran.replace(R.id.main_container,sa);
+        tran.addToBackStack("");
+        tran.commit();
+
+    }
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tran.commit();
+
     }
 }

@@ -8,9 +8,20 @@ import java.util.List;
  */
 
 public class Model {
+
     public final static Model instace = new Model();
 
+    //private ModelMem modelMem;
+   // private ModelSql modelSql;
+    private ModelFirebase modelFirebase;
+
+
     private Model(){
+
+        // modelMem = new ModelMem();
+        //modelSql = new ModelSql(MyApplication.getMyContext());
+        modelFirebase = new ModelFirebase();
+
         for(int i=0;i<2;i++){
             Student st = new Student();
             st.name = "kuku" + i;
@@ -25,6 +36,22 @@ public class Model {
         }
     }
 
+    public void addParent(Parent p) {
+        //StudentSql.addStudent(modelSql.getWritableDatabase(),st);
+        modelFirebase.addParent(p);
+    }
+
+    public void addBabySitter(BabySitter bs) {
+        //StudentSql.addStudent(modelSql.getWritableDatabase(),st);
+          modelFirebase.addBabySitter(bs);
+    }
+
+    public void addStudent(Student st) {
+        //StudentSql.addStudent(modelSql.getWritableDatabase(),st);
+      //  modelFirebase.addStudent(st);
+    }
+
+
 
     private List<Student> data = new LinkedList<Student>();
 
@@ -32,9 +59,7 @@ public class Model {
         return data;
     }
 
-    public void addStudent(Student st){
-        data.add(st);
-    }
+
     public  void deleteStudent(Student st){data.remove(st); }
 
     public Student getStudent(String stId) {

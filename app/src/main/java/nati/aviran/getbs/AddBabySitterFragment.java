@@ -4,8 +4,11 @@ package nati.aviran.getbs;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,10 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import nati.aviran.getbs.Dialogs.AddBabySitterDialogFragment;
+import nati.aviran.getbs.model.BabySitter;
 import nati.aviran.getbs.model.Model;
 import nati.aviran.getbs.model.Student;
 
@@ -36,6 +42,12 @@ public class AddBabySitterFragment extends Fragment  {
     private static final String ID = "id";
     private String id ;
     private Student st;
+
+    ImageView imageView;
+    Bitmap imageBitmap;
+    ProgressBar progressBar;
+
+
     //private static final
 
     private OnFragmentInteractionListener mListener;
@@ -75,120 +87,73 @@ public class AddBabySitterFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v =inflater.inflate(R.layout.fragment_add_babysitter, container, false);
-        Button save= (Button)v.findViewById(R.id.mainSaveBtn);
-        Button cel=(Button)v.findViewById(R.id.mainCancelBtn);
+        Button add= (Button)v.findViewById(R.id.addBSitterAddbtn);
+        Button cel=(Button)v.findViewById(R.id.addBSitterCancelbtn);
+
+
+        cel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onFragmentInteraction(false);
+                return;
+            }
+        });
+
+        imageView = (ImageView)v.findViewById(R.id.bsImageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+            }
+        });
         Log.d("TAG","Create view");
-/*
-          EditText nameEt = (EditText) v.findViewById(R.id.mainNameTv);
-         EditText idEt= (EditText) v.findViewById(R.id.mainIdTv);
-         EditText phone= (EditText) v.findViewById(R.id.mainPhoneTv);
-         EditText Address= (EditText) v.findViewById(R.id.AddressEdit);
-        MyTimePicker time = (MyTimePicker) v.findViewById(R.id.frag_input_time1);
-        MyDatePicker date = (MyDatePicker) v.findViewById(R.id.frag_input_date1);
-        Boolean checekd =((CheckBox)v.findViewById((R.id.strow_cb12))).isChecked();
 
-        Button remove = (Button)v.findViewById(R.id.mainDelBtn);
-        Log.d("Tag","***********8"+id);
-        st =Model.instace.getStudent(id);
-        if(id!=null)
-        {
-            MainActivity.CurrentFragment="Edit";
-            //Log.d("Tag",st.id+"***********8"+id);
-            remove.setVisibility(View.VISIBLE);
-            nameEt.setText(st.name, TextView.BufferType.EDITABLE);
-            idEt.setText(st.id, TextView.BufferType.EDITABLE);
-            phone.setText(st.phone, TextView.BufferType.EDITABLE);
-            Address.setText(st.address, TextView.BufferType.EDITABLE);
-            time.setText(st.time,TextView.BufferType.EDITABLE);
-            date.setText(st.date, TextView.BufferType.EDITABLE);
-            ((CheckBox) v.findViewById((R.id.strow_cb12))).setChecked(st.checked);
-
-        }
-        else
-            MainActivity.CurrentFragment="add";
         View.OnClickListener click = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText nameEt = (EditText) v.findViewById(R.id.mainNameTv);
-                EditText idEt= (EditText) v.findViewById(R.id.mainIdTv);
-                EditText phone= (EditText) v.findViewById(R.id.mainPhoneTv);
-                EditText Address= (EditText) v.findViewById(R.id.AddressEdit);
-                MyTimePicker time = (MyTimePicker) v.findViewById(R.id.frag_input_time1);
-                MyDatePicker date = (MyDatePicker) v.findViewById(R.id.frag_input_date1);
-                Boolean checekd =((CheckBox)v.findViewById((R.id.strow_cb12))).isChecked();
-                if(view.getId() == R.id.mainCancelBtn)
+
+
+                EditText email= (EditText) v.findViewById(R.id.addBSitterEmailTv);
+                EditText password= (EditText) v.findViewById(R.id.addBSitterPasswordTv);
+                EditText address = (EditText) v.findViewById(R.id.addBSitterAddressTv);
+                EditText age = (EditText) v.findViewById(R.id.addBSitterAgeTv);
+                EditText availability= (EditText) v.findViewById(R.id.addBSitterAvailabilityTv);
+                EditText name= (EditText) v.findViewById(R.id.addBSitterNameTv);
+                EditText phone= (EditText) v.findViewById(R.id.addBSitterPhoneTv);
+                EditText salary= (EditText) v.findViewById(R.id.addBSitterSalaryTv);
+
+                if((email.getText().toString().equals(""))||
+                        (password.getText().toString().equals(""))||
+                        (address.getText().toString().equals(""))||
+                        (age.getText().toString().equals("")) ||
+                        (availability.getText().toString().isEmpty()) ||
+                        (phone.getText().toString().isEmpty()) ||
+                        (salary.getText().toString().isEmpty()) ||
+                        (name.getText().toString().isEmpty() ) )
                 {
-                    mListener.onFragmentInteraction(false);
+                    ((TextView) v.findViewById(R.id.errorMessage)).setText("there is empty value");
                     return;
+                }else {
+
+                    BabySitter New = new BabySitter();
+                    New.email = email.getText().toString();
+                    New.password = password.getText().toString();
+                    New.phone = phone.getText().toString();
+                    New.name = name.getText().toString();
+                    New.address = address.getText().toString();
+                    New.salary = salary.getText().toString();
+                    New.age = age.getText().toString();
+                    New.availability = availability.getText().toString();
+                    Model.instace.addBabySitter(New);
+                    DialogFragment dialog = new AddBabySitterDialogFragment();
+                    dialog.show(getFragmentManager(), "TAG");
+                    mListener.onFragmentInteraction(true);
                 }
-                else if(view.getId()==R.id.mainSaveBtn)
-                {
-
-                    if(st!=null)
-                    {
-                        if((idEt.getText().toString().equals(""))||(nameEt.getText().toString().equals(""))||(phone.getText().toString().equals(""))||
-                                (Address.getText().toString().equals("")) || (date.getText().toString().isEmpty()) || (time.getText().toString().isEmpty() ) ) {
-                            ((TextView) v.findViewById(R.id.Message1)).setText("you cannot leave any value empty - please fix it ");
-                            return;
-                        }
-                        if(((id.equals(idEt.getText().toString()))))
-                        {
-                        st.name = nameEt.getText().toString();
-                        st.id = idEt.getText().toString();
-                        st.phone = phone.getText().toString();
-                        st.address = Address.getText().toString();
-                        st.checked = ((CheckBox)v.findViewById((R.id.strow_cb12))).isChecked();
-                        st.time = time.getText().toString();
-                        st.date = date.getText().toString();
-                        DialogFragment dialog = new SaveStudentDialogFragment();
-                        dialog.show(getFragmentManager(),"TAG");
-                        mListener.onFragmentInteraction(true);
-                        }
-                        else
-                            ((TextView)v.findViewById(R.id.Message1)).setText("You can only edit Student "+id);
-                    }
-                    else {
-                        if((idEt.getText().toString().equals(""))||(nameEt.getText().toString().equals(""))||(phone.getText().toString().equals(""))||
-                                (Address.getText().toString().equals("")) || (date.getText().toString().isEmpty()) || (time.getText().toString().isEmpty() ) ) {
-                            ((TextView) v.findViewById(R.id.Message1)).setText("you cannot leave any value empty - please fix it ");
-                            return;
-                        }
-                        if(Model.instace.checkIfIdExists(idEt.getText().toString()))
-                        {
-                            ((TextView) v.findViewById(R.id.Message1)).setText("this id is already exist ");
-                        }
-                        else {
-                            Student New = new Student();
-                            New.address = Address.getText().toString();
-                            New.checked = checekd;
-                            New.id = idEt.getText().toString();
-                            New.phone = phone.getText().toString();
-                            New.name = nameEt.getText().toString();
-                            New.time = time.getText().toString();
-                            New.date = date.getText().toString();
-                            Model.instace.addStudent(New);
-                            DialogFragment dialog = new SaveStudentDialogFragment();
-                            dialog.show(getFragmentManager(),"TAG");
-                            mListener.onFragmentInteraction(true);
-                        }
-                    }
-                }
-                else
-                {
-                    if( st.id.equals(idEt.getText().toString())) {
-                        Model.instace.deleteStudent(st);
-                        mListener.onFragmentInteraction(true);
-                    }
-
-                }
-
-
             }
         };
-        remove.setOnClickListener(click);
-        save.setOnClickListener(click);
-        cel.setOnClickListener(click);
-        */
+
+        add.setOnClickListener(click);
+
         return v;
     }
 
@@ -237,7 +202,23 @@ public class AddBabySitterFragment extends Fragment  {
     }
 
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity( getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(imageBitmap);
+        }
+    }
 
     /**
      * This interface must be implemented by activities that contain this

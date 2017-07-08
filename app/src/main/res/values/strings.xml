@@ -2,6 +2,11 @@
     <string name="app_name">GetBS</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancel">Cancel</string>
-    <string name="dialog_fire_missiles">The Student Saved Successfully</string>
+
     <string name="fire">OK</string>
+
+
+
+    <string name="dialog_addBS">The Baby Sitter Added Successfully</string>
+    <string name="dialog_addParent">The Parent Added Successfully</string>
 </resources>

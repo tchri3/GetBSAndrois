@@ -40,7 +40,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/addBSitterEmailTv"
+            android:id="@+id/addParentEmailTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"/>
@@ -60,7 +60,7 @@
             android:layout_margin="10dp"/>
 
         <EditText
-            android:id="@+id/addBSitterPasswordTv"
+            android:id="@+id/addParentPasswordTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"/>
@@ -80,7 +80,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/addBSitterNameTv"
+            android:id="@+id/addParentNameTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp" />
@@ -99,7 +99,7 @@
                     android:layout_margin="10dp"/>
 
                 <EditText
-                    android:id="@+id/addBSitterAddressTv"
+                    android:id="@+id/addParentAddressTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"/>
@@ -112,7 +112,7 @@
 
 
         <Button
-            android:id="@+id/mainSaveBtn"
+            android:id="@+id/addParentAddBtn"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -122,7 +122,7 @@
             android:onClick="btnListener"
             android:text="ADD" />
         <Button
-            android:id="@+id/mainCancelBtn"
+            android:id="@+id/addParentCancelBtn"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:text="CANCEL"

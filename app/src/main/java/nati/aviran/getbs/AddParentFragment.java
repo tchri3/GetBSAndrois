@@ -13,30 +13,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import nati.aviran.getbs.Dialogs.AddBabySitterDialogFragment;
+import nati.aviran.getbs.Dialogs.AddParentDialogFragment;
 import nati.aviran.getbs.model.Model;
-import nati.aviran.getbs.model.Student;
+import nati.aviran.getbs.model.Parent;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LoginFragment.OnFragmentInteractionListener} interface
+ * {@link AddParentFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link LoginFragment#newInstance} factory method to
+ * Use the {@link AddParentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends Fragment  {
+public class AddParentFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
+    // TODO: Rename and change types of parameters
+    private static final String ID = "id";
 
+    //private static final
 
     private OnFragmentInteractionListener mListener;
 
-    public LoginFragment() {
+    public AddParentFragment() {
         // Required empty public constructor
     }
 
@@ -47,10 +51,10 @@ public class LoginFragment extends Fragment  {
      * @return A new instance of fragment AddBabySitterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance() {
-        LoginFragment fragment = new LoginFragment();
+    public static AddParentFragment newInstance(String id) {
+        AddParentFragment fragment = new AddParentFragment();
         Bundle args = new Bundle();
-
+        args.putString(ID,id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,58 +62,82 @@ public class LoginFragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setHasOptionsMenu(true);
 
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final View v =inflater.inflate(R.layout.fragment_add_parent, container, false);
+        Button add= (Button)v.findViewById(R.id.addParentAddBtn);
+        Button cel=(Button)v.findViewById(R.id.addParentCancelBtn);
+
+
+        cel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onFragmentInteraction(false);
+                return;
+            }
+        });
+
 
         Log.d("TAG","Create view");
-        MainActivity.CurrentFragment="login";
-
-        final View v =inflater.inflate(R.layout.fragment_login, container, false);
-
-        Button signin= (Button)v.findViewById(R.id.loginInBtn);
-        Button signupBS= (Button)v.findViewById(R.id.loginSignupBabysitterBtn);
-        Button signupParent= (Button)v.findViewById(R.id.loginSignupParentBtn);
 
         View.OnClickListener click = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  mListener.onFragmentInteraction(1);
-              //  mListener.onFragmentInteraction(true);
+
+                EditText email= (EditText) v.findViewById(R.id.addParentEmailTv);
+                EditText password= (EditText) v.findViewById(R.id.addParentPasswordTv);
+                EditText address = (EditText) v.findViewById(R.id.addParentAddressTv);
+                EditText name= (EditText) v.findViewById(R.id.addParentNameTv);
+
+                if((email.getText().toString().equals(""))||
+                        (password.getText().toString().equals(""))||
+                        (address.getText().toString().equals(""))||
+                        (name.getText().toString().isEmpty() ) )
+                {
+                    ((TextView) v.findViewById(R.id.errorMessage)).setText("there is empty value");
+                    return;
+                }else {
+
+                    Parent New = new Parent();
+                    New.email = email.getText().toString();
+                    New.password = password.getText().toString();
+                    New.name = name.getText().toString();
+                    New.address = address.getText().toString();
+                    Model.instace.addParent(New);
+                    mListener.onFragmentInteraction(true);
+                    DialogFragment dialog = new AddParentDialogFragment();
+                    dialog.show(getFragmentManager(), "TAG");
+
+                }
             }
         };
 
-        View.OnClickListener signupBSClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //  mListener.onFragmentInteraction(1);
-                mListener.onFragmentInteractionSignUp(true);
-            }
-        };
-
-        View.OnClickListener signupParentClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //  mListener.onFragmentInteraction(1);
-                mListener.onFragmentInteractionSignUp(false);
-            }
-        };
-
-        signupBS.setOnClickListener(signupBSClick);
-        signupParent.setOnClickListener(signupParentClick);
-        signin.setOnClickListener(click);
+        add.setOnClickListener(click);
 
         return v;
-
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
+
+    public void onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem register = menu.findItem(R.id.main_edit).setVisible(false);
+        menu.findItem(R.id.main_add).setVisible(false);
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+
+       // register.setVisible(true);
+        // getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+      //  MainActivity.CurrentFragment="Add";
         Log.d("TAG","MainActivity attach");
 
         if (context instanceof OnFragmentInteractionListener) {
@@ -139,9 +167,6 @@ public class LoginFragment extends Fragment  {
         mListener = null;
     }
 
-
-
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -154,7 +179,6 @@ public class LoginFragment extends Fragment  {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-       // void onFragmentInteraction(boolean bool);
-        void onFragmentInteractionSignUp(boolean isBs);
+        void onFragmentInteraction(boolean bool);
     }
 }
