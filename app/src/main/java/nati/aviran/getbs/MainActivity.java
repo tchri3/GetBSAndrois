@@ -12,7 +12,7 @@ import nati.aviran.getbs.model.Student;
 
 
 public class MainActivity extends Activity
-        implements AddParentFragment.OnFragmentInteractionListener, StudentListFragment.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener,AddBabySitterFragment.OnFragmentInteractionListener ,StudentDetailsFragment.OnFragmentInteractionListener{
+        implements AddParentFragment.OnFragmentInteractionListener, BabySitterListFragment.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener,AddBabySitterFragment.OnFragmentInteractionListener ,BabySitterDetailsFragment.OnFragmentInteractionListener{
     public static  String CurrentFragment;
 
     //  FragmentTransaction tran =  getFragmentManager().beginTransaction();
@@ -24,14 +24,14 @@ public class MainActivity extends Activity
         Log.d("TAG","MainActivity onCreate");
         FragmentTransaction tran =  getFragmentManager().beginTransaction();
        // CurrentFragment = "List";
-       // StudentListFragment listFragment = StudentListFragment.newInstance();
-      //  tran.add(R.id.main_container, listFragment);
+       // BabySitterListFragment listFragment = BabySitterListFragment.newInstance();
+       // tran.add(R.id.main_container, listFragment);
 
         CurrentFragment = "login";
         LoginFragment loginFragment = LoginFragment.newInstance();
         tran.add(R.id.main_container, loginFragment);
         tran.commit();
-
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -46,42 +46,14 @@ public class MainActivity extends Activity
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         switch (itemId){
-            case R.id.main_add:
-                AddBabySitterFragment sa = AddBabySitterFragment.newInstance(null);
-                this.CurrentFragment="addBS";
+            case R.id.main_logout:
+                CurrentFragment = "login";
+                LoginFragment loginFragment = LoginFragment.newInstance();
                 FragmentTransaction tran = getFragmentManager().beginTransaction();
-                tran.replace(R.id.main_container,sa);
-                tran.addToBackStack("");
+                tran.replace(R.id.main_container, loginFragment);
                 tran.commit();
                 getActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
-            case android.R.id.home:
-/*
-                if(this.CurrentFragment.equals("login"))
-                {
-                    getActionBar().setDisplayHomeAsUpEnabled(false);
-
-                }else {
-
-                    onBackPressed();
-                }*/
-
-                break;
-
-
-/*
-            case R.id.main_edit:
-            {
-                String id =((TextView)findViewById(R.id.detId)).toString();
-                AddBabySitterFragment s= AddBabySitterFragment.newInstance(id);
-                FragmentTransaction tran3 = getFragmentManager().beginTransaction();
-                //tran3.
-                tran3.replace(R.id.main_container,s);
-                tran3.addToBackStack("");
-                tran3.commit();
-                getActionBar().setDisplayHomeAsUpEnabled(true);
-                break;
-            }*/
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -94,11 +66,11 @@ public class MainActivity extends Activity
 
 
     @Override
-    public void onFragmentInteraction(String id) {
-        this.CurrentFragment="StudentDetails";
-        StudentDetailsFragment studentDetailsFragment = StudentDetailsFragment.newInstance(id);
+    public void onFragmentInteraction(String email) {
+        this.CurrentFragment="BabySitterDetails";
+        BabySitterDetailsFragment babySitterDetailsFragment = BabySitterDetailsFragment.newInstance(email);
         FragmentTransaction tran = getFragmentManager().beginTransaction();
-        tran.replace(R.id.main_container,studentDetailsFragment);
+        tran.replace(R.id.main_container, babySitterDetailsFragment);
         tran.addToBackStack("");
         // CurrentFragment="Details";
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -112,34 +84,37 @@ public class MainActivity extends Activity
     @Override
     public void onFragmentInteraction(boolean bool) {
         Log.d("TAG","onFragmentInteraction login ");
-        CurrentFragment = "login";
-        LoginFragment loginFragment = LoginFragment.newInstance();
-        FragmentTransaction tran = getFragmentManager().beginTransaction() ;
-        tran.replace(R.id.main_container, loginFragment);
-        tran.commit();
-        getActionBar().setDisplayHomeAsUpEnabled(false);
+        if(!bool) {
 
+            CurrentFragment = "login";
+            LoginFragment loginFragment = LoginFragment.newInstance();
+            FragmentTransaction tran = getFragmentManager().beginTransaction();
+            tran.replace(R.id.main_container, loginFragment);
+            tran.commit();
+            getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*
-        CurrentFragment="List";
-        StudentListFragment listFragment = StudentListFragment.newInstance();
-        FragmentTransaction tran = getFragmentManager().beginTransaction() ;
-        tran.replace(R.id.main_container,listFragment);
-        tran.commit();
-        getActionBar().setDisplayHomeAsUpEnabled(false);
-*/
+        }
+        else
+        {
+            CurrentFragment="List";
+            BabySitterListFragment listFragment = BabySitterListFragment.newInstance();
+            FragmentTransaction tran = getFragmentManager().beginTransaction() ;
+            tran.replace(R.id.main_container,listFragment);
+            tran.commit();
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
-    @Override
+  /*  @Override
     public void onFragmentInteraction(Student str) {
 
-    }
+    }*/
 
 @Override
     public void onFragmentInteractionSignUp(boolean isBs) {
     if(isBs)
     {
-        AddBabySitterFragment sa = AddBabySitterFragment.newInstance(null);
+        AddBabySitterFragment sa = AddBabySitterFragment.newInstance();
         this.CurrentFragment="addBS";
         FragmentTransaction tran = getFragmentManager().beginTransaction();
         tran.replace(R.id.main_container,sa);
@@ -148,7 +123,7 @@ public class MainActivity extends Activity
 
     }else
     {
-        AddParentFragment sa = AddParentFragment.newInstance(null);
+        AddParentFragment sa = AddParentFragment.newInstance();
         this.CurrentFragment="addParent";
         FragmentTransaction tran = getFragmentManager().beginTransaction();
         tran.replace(R.id.main_container,sa);

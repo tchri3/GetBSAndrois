@@ -14,5 +14,5 @@ public class BabySitter {
     public String availability;
 
 
-    public String lastUpdate;
+    public double lastUpdateDate;
 }

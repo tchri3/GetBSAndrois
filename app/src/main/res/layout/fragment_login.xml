@@ -13,7 +13,7 @@
         android:background="@color/common_google_signin_btn_text_dark_default"
         android:cropToPadding="false"
         android:scaleType="center"
-        android:src="@drawable/logo" />
+        android:src="@drawable/getbslogo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,16 +59,19 @@
         android:orientation="horizontal">
 
 
-    <Button
-        android:id="@+id/loginInBtn"
-        android:layout_width="match_parent"
-        android:layout_margin="0dp"
-        android:layout_height="wrap_content"
-        android:text="sign in"
-        android:gravity="center"
-        android:layout_gravity="bottom"
-        android:onClick="btnListener"
-        android:layout_weight="1"/>
+        <Button
+            android:id="@+id/loginInBtn"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="0dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:onClick="btnListener"
+            android:text="sign in"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -86,12 +89,12 @@
             android:gravity="center"
             android:layout_gravity="bottom"
             android:onClick="btnListener"
-            android:layout_weight="1"/>
+            android:layout_weight="0.77"/>
         <Button
             android:id="@+id/loginSignupBabysitterBtn"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:text="sign up as babissiter"
+            android:text="sign up as baby sitter"
             android:gravity="center"
             android:layout_gravity="bottom"
             android:layout_margin="0dp"

@@ -48,39 +48,20 @@ public class ModelFirebase {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
- /*   public void addBabysitter(Student st) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("babysitter");
-        myRef.child(st.id).setValue(st);
-    }
-    */
-
-    interface GetStudentCallback {
-        void onComplete(Student student);
+    interface GetBabySitterCallback {
+        void onComplete(BabySitter bs);
 
         void onCancel();
     }
 
-    public void getStudent(String stId, final GetStudentCallback callback) {
+    public void getBabySitter(String email, final GetBabySitterCallback callback) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("students");
-        myRef.child(stId).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference myRef = database.getReference("babySitter");
+        myRef.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Student student = dataSnapshot.getValue(Student.class);
-                callback.onComplete(student);
+                BabySitter bs = dataSnapshot.getValue(BabySitter.class);
+                callback.onComplete(bs);
             }
 
             @Override
@@ -90,20 +71,21 @@ public class ModelFirebase {
         });
     }
 
-    interface GetAllStudentsAndObserveCallback {
-        void onComplete(List<Student> list);
+
+    interface GetAllBabySittersAndObserveCallback {
+        void onComplete(List<BabySitter> list);
         void onCancel();
     }
-    public void getAllStudentsAndObserve(final GetAllStudentsAndObserveCallback callback) {
+    public void getAllBabySittersAndObserve(final GetAllBabySittersAndObserveCallback callback) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("students");
+        DatabaseReference myRef = database.getReference("babySitter");
         ValueEventListener listener = myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Student> list = new LinkedList<Student>();
+                List<BabySitter> list = new LinkedList<BabySitter>();
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                    Student student = snap.getValue(Student.class);
-                    list.add(student);
+                    BabySitter babySitter = snap.getValue(BabySitter.class);
+                    list.add(babySitter);
                 }
                 callback.onComplete(list);
             }
@@ -114,4 +96,42 @@ public class ModelFirebase {
             }
         });
     }
+
+
+    public void getAllBabySittersAndObserve(double lastUpdateDate,
+                                         final GetAllBabySittersAndObserveCallback callback) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("babySitter");
+
+        myRef.orderByChild("lastUpdateDate").startAt(lastUpdateDate)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        List<BabySitter> list = new LinkedList<BabySitter>();
+                        for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                            BabySitter babySitter = snap.getValue(BabySitter.class);
+                            list.add(babySitter);
+                        }
+                        callback.onComplete(list);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

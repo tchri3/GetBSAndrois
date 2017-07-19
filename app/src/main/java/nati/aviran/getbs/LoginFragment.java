@@ -55,6 +55,12 @@ public class LoginFragment extends Fragment  {
         return fragment;
     }
 
+    public void onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem register = menu.findItem(R.id.main_logout).setVisible(false);
+        register.setVisible(false);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +84,7 @@ public class LoginFragment extends Fragment  {
             @Override
             public void onClick(View view) {
               //  mListener.onFragmentInteraction(1);
-              //  mListener.onFragmentInteraction(true);
+                mListener.onFragmentInteraction(true);
             }
         };
 
@@ -154,7 +160,7 @@ public class LoginFragment extends Fragment  {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-       // void onFragmentInteraction(boolean bool);
+        void onFragmentInteraction(boolean bool);
         void onFragmentInteractionSignUp(boolean isBs);
     }
 }

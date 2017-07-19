@@ -39,9 +39,7 @@ public class AddBabySitterFragment extends Fragment  {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     // TODO: Rename and change types of parameters
-    private static final String ID = "id";
-    private String id ;
-    private Student st;
+
 
     ImageView imageView;
     Bitmap imageBitmap;
@@ -63,20 +61,14 @@ public class AddBabySitterFragment extends Fragment  {
      * @return A new instance of fragment AddBabySitterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddBabySitterFragment newInstance(String id) {
+    public static AddBabySitterFragment newInstance() {
         AddBabySitterFragment fragment = new AddBabySitterFragment();
-        Bundle args = new Bundle();
-        args.putString(ID,id);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            id = getArguments().getString(ID);
-        }
         setHasOptionsMenu(true);
 
 
@@ -147,7 +139,7 @@ public class AddBabySitterFragment extends Fragment  {
                     Model.instace.addBabySitter(New);
                     DialogFragment dialog = new AddBabySitterDialogFragment();
                     dialog.show(getFragmentManager(), "TAG");
-                    mListener.onFragmentInteraction(true);
+                    mListener.onFragmentInteraction(false); // back to login
                 }
             }
         };
@@ -161,9 +153,12 @@ public class AddBabySitterFragment extends Fragment  {
 
     public void onPrepareOptionsMenu(Menu menu)
     {
-        MenuItem register = menu.findItem(R.id.main_edit).setVisible(false);
-        menu.findItem(R.id.main_add).setVisible(false);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
+       MenuItem register = menu.findItem(R.id.main_logout).setVisible(false);
+         register.setVisible(false);
+
+       //  getActionBar().setDisplayHomeAsUpEnabled(true);
+      //  menu.findItem(R.id.main_add).setVisible(false);
+       /// getActionBar().setDisplayHomeAsUpEnabled(true);
 
        // register.setVisible(true);
         // getActionBar().setDisplayHomeAsUpEnabled(true);

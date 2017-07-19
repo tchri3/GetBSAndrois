@@ -34,7 +34,7 @@ public class AddParentFragment extends Fragment  {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     // TODO: Rename and change types of parameters
-    private static final String ID = "id";
+
 
     //private static final
 
@@ -51,11 +51,9 @@ public class AddParentFragment extends Fragment  {
      * @return A new instance of fragment AddBabySitterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddParentFragment newInstance(String id) {
+    public static AddParentFragment newInstance() {
         AddParentFragment fragment = new AddParentFragment();
-        Bundle args = new Bundle();
-        args.putString(ID,id);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -127,12 +125,8 @@ public class AddParentFragment extends Fragment  {
 
     public void onPrepareOptionsMenu(Menu menu)
     {
-        MenuItem register = menu.findItem(R.id.main_edit).setVisible(false);
-        menu.findItem(R.id.main_add).setVisible(false);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-
-       // register.setVisible(true);
-        // getActionBar().setDisplayHomeAsUpEnabled(true);
+        MenuItem register = menu.findItem(R.id.main_logout).setVisible(false);
+        register.setVisible(false);
     }
     @Override
     public void onAttach(Context context) {
