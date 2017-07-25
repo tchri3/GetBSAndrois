@@ -3,12 +3,14 @@ package nati.aviran.getbs;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -202,10 +204,32 @@ public class BabySitterListFragment extends Fragment {
             TextView age = (TextView) convertView.findViewById(R.id.strow_age);
             TextView salary = (TextView) convertView.findViewById(R.id.strow_salary);
 
-            BabySitter bs = data.get(position);
+            final BabySitter bs = data.get(position);
             name.setText(bs.name);
             age.setText(bs.age);
             salary.setText(bs.salary);
+
+            final ImageView imageView = (ImageView) convertView.findViewById(R.id.strow_image);
+
+            if (bs.imageUrl != null && !bs.imageUrl.isEmpty() && !bs.imageUrl.equals("")){
+
+                Model.instace.getImage(bs.imageUrl, new Model.GetImageListener() {
+                    @Override
+                    public void onSuccess(Bitmap image) {
+                      //  if(imageView.getTag() != null) {
+                          //  String tagUrl = imageView.getTag().toString();
+                          //  if (tagUrl.equals(bs.imageUrl)) {
+                                imageView.setImageBitmap(image);
+                        //    }
+                       // }
+                    }
+
+                    @Override
+                    public void onFail() {
+
+                    }
+                });
+            }
 
             return convertView;
         }

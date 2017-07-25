@@ -108,7 +108,7 @@ public class AddParentFragment extends Fragment  {
                     New.name = name.getText().toString();
                     New.address = address.getText().toString();
                     Model.instace.addParent(New);
-                    mListener.onFragmentInteraction(true);
+                    mListener.onFragmentInteraction(false);
                     DialogFragment dialog = new AddParentDialogFragment();
                     dialog.show(getFragmentManager(), "TAG");
 

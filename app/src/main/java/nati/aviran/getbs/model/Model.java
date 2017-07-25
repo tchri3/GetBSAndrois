@@ -2,7 +2,10 @@ package nati.aviran.getbs.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.webkit.URLUtil;
+
 import nati.aviran.getbs.MyApp;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,11 +23,13 @@ public class Model {
     private ModelFirebase modelFirebase;
 
 
+
     private Model(){
 
         // modelMem = new ModelMem();
         modelSql = new ModelSql(MyApp.getMyContext());
         modelFirebase = new ModelFirebase();
+
 
      /*   for(int i=0;i<2;i++){
             Student st = new Student();
@@ -40,6 +45,10 @@ public class Model {
         }
         */
     }
+
+
+
+
 
     public void addParent(Parent p) {
         //StudentSql.addStudent(modelSql.getWritableDatabase(),st);
@@ -85,6 +94,30 @@ public class Model {
         return false;
     }
 */
+
+    public interface GetLoginCallback {
+        void onSuccess();
+        void onFail();
+    }
+
+    public void login(String email,String password,final GetLoginCallback callback) {
+
+        modelFirebase.login(email, password, new ModelFirebase.GetLoginCallback()
+        {
+            @Override
+            public void onSuccess() {
+                callback.onSuccess();
+            }
+
+            @Override
+            public void onFail() {
+                callback.onFail();
+            }
+
+
+        });
+
+    }
 
     public interface GetBabySitterCallback {
         void onComplete(BabySitter bs);
@@ -160,9 +193,71 @@ public class Model {
         });
 
 
-        //todo: updatre studenty last update property
+    }
+
+
+
+
+    public interface SaveImageListener {
+        void complete(String url);
+        void fail();
+    }
+
+    public void saveImage(final Bitmap imageBmp, final String name, final SaveImageListener listener) {
+        modelFirebase.saveImage(imageBmp, name, new SaveImageListener() {
+            @Override
+            public void complete(String url) {
+                String fileName = URLUtil.guessFileName(url, null, null);
+                ModelFiles.saveImageToFile(imageBmp,fileName);
+                listener.complete(url);
+            }
+
+            @Override
+            public void fail() {
+                listener.fail();
+            }
+        });
+
 
     }
+
+
+    public interface GetImageListener{
+        void onSuccess(Bitmap image);
+        void onFail();
+    }
+    public void getImage(final String url, final GetImageListener listener) {
+        //check if image exsist localy
+        final String fileName = URLUtil.guessFileName(url, null, null);
+        ModelFiles.loadImageFromFileAsynch(fileName, new ModelFiles.LoadImageFromFileAsynch() {
+            @Override
+            public void onComplete(Bitmap bitmap) {
+                if (bitmap != null){
+                    Log.d("TAG","getImage from local success " + fileName);
+                    listener.onSuccess(bitmap);
+                }else {
+                    modelFirebase.getImage(url, new GetImageListener() {
+                        @Override
+                        public void onSuccess(Bitmap image) {
+                            String fileName = URLUtil.guessFileName(url, null, null);
+                            Log.d("TAG","getImage from FB success " + fileName);
+                            ModelFiles.saveImageToFile(image,fileName);
+                            listener.onSuccess(image);
+                        }
+
+                        @Override
+                        public void onFail() {
+                            Log.d("TAG","getImage from FB fail ");
+                            listener.onFail();
+                        }
+                    });
+
+                }
+            }
+        });
+
+    }
+
 
 
 }

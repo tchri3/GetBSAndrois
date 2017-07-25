@@ -26,6 +26,8 @@ import nati.aviran.getbs.model.BabySitter;
 import nati.aviran.getbs.model.Model;
 import nati.aviran.getbs.model.Student;
 
+import static android.view.View.GONE;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -127,7 +129,7 @@ public class AddBabySitterFragment extends Fragment  {
                     return;
                 }else {
 
-                    BabySitter New = new BabySitter();
+                    final BabySitter New = new BabySitter();
                     New.email = email.getText().toString();
                     New.password = password.getText().toString();
                     New.phone = phone.getText().toString();
@@ -136,10 +138,33 @@ public class AddBabySitterFragment extends Fragment  {
                     New.salary = salary.getText().toString();
                     New.age = age.getText().toString();
                     New.availability = availability.getText().toString();
-                    Model.instace.addBabySitter(New);
-                    DialogFragment dialog = new AddBabySitterDialogFragment();
-                    dialog.show(getFragmentManager(), "TAG");
-                    mListener.onFragmentInteraction(false); // back to login
+
+
+                    if (imageBitmap != null) {
+                        Model.instace.saveImage(imageBitmap, New.email + ".jpeg", new Model.SaveImageListener() {
+                            @Override
+                            public void complete(String url) {
+                                New.imageUrl = url;
+                                Model.instace.addBabySitter(New);
+                                DialogFragment dialog = new AddBabySitterDialogFragment();
+                                dialog.show(getFragmentManager(), "TAG");
+                                mListener.onFragmentInteraction(false); // back to login
+                            }
+
+                            @Override
+                            public void fail() {
+                                ((TextView) v.findViewById(R.id.errorMessage)).setText("there is problem with the image");
+                                return;
+                            }
+                        });
+                    }else{
+                        Model.instace.addBabySitter(New);
+                        DialogFragment dialog = new AddBabySitterDialogFragment();
+                        dialog.show(getFragmentManager(), "TAG");
+                        mListener.onFragmentInteraction(false); // back to login
+                    }
+
+
                 }
             }
         };

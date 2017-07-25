@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import nati.aviran.getbs.model.Model;
@@ -103,7 +105,7 @@ public class BabySitterDetailsFragment extends Fragment {
         final TextView salary= (TextView)view.findViewById(R.id.detailsSalaryTv);
         final TextView age =(TextView) view.findViewById(R.id.detailsAgeTv);
         final TextView availability =(TextView) view.findViewById(R.id.detailsAvailabilityTv);
-
+        final ImageView imageView = (ImageView) view.findViewById(R.id.detailsImageView);
 
         Model.instace.getBabySitter(email, new Model.GetBabySitterCallback() {
             @Override
@@ -117,6 +119,26 @@ public class BabySitterDetailsFragment extends Fragment {
                 age.setText(bs.age);
                 availability.setText(bs.availability);
                 address.setText(bs.address);
+
+
+                if (bs.imageUrl != null && !bs.imageUrl.isEmpty() && !bs.imageUrl.equals("")){
+
+                    Model.instace.getImage(bs.imageUrl, new Model.GetImageListener() {
+                        @Override
+                        public void onSuccess(Bitmap image) {
+
+                            imageView.setImageBitmap(image);
+
+                        }
+
+                        @Override
+                        public void onFail() {
+
+                        }
+                    });
+                }
+
+
 
             }
 

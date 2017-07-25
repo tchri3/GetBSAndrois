@@ -76,6 +76,10 @@ public class LoginFragment extends Fragment  {
 
         final View v =inflater.inflate(R.layout.fragment_login, container, false);
 
+
+        final EditText email= (EditText) v.findViewById(R.id.loginEmailTv);
+        final EditText password= (EditText) v.findViewById(R.id.loginPasswordTv);
+
         Button signin= (Button)v.findViewById(R.id.loginInBtn);
         Button signupBS= (Button)v.findViewById(R.id.loginSignupBabysitterBtn);
         Button signupParent= (Button)v.findViewById(R.id.loginSignupParentBtn);
@@ -83,8 +87,20 @@ public class LoginFragment extends Fragment  {
         View.OnClickListener click = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  mListener.onFragmentInteraction(1);
-                mListener.onFragmentInteraction(true);
+
+                Model.instace.login(email.getText().toString(),password.getText().toString() , new Model.GetLoginCallback()
+                {
+                    @Override
+                    public void onSuccess() {
+                        mListener.onFragmentInteraction(true);
+                    }
+
+                    @Override
+                    public void onFail() {
+
+                    }
+
+                });
             }
         };
 
@@ -111,6 +127,8 @@ public class LoginFragment extends Fragment  {
         return v;
 
     }
+
+
 
     @Override
     public void onAttach(Context context) {
