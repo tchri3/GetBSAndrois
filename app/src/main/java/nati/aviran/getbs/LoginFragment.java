@@ -87,20 +87,33 @@ public class LoginFragment extends Fragment  {
         View.OnClickListener click = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final TextView errorMessage = ((TextView) v.findViewById(R.id.loginError));
+                errorMessage.setVisibility(View.GONE);
+
+                if((email.getText().toString().equals(""))||(password.getText().toString().equals("")) ) {
+                    errorMessage.setVisibility(View.VISIBLE);
+                    errorMessage.setText("You cannot leave any value empty");
+                    return;
+                }
+
 
                 Model.instace.login(email.getText().toString(),password.getText().toString() , new Model.GetLoginCallback()
                 {
                     @Override
                     public void onSuccess() {
+
                         mListener.onFragmentInteraction(true);
                     }
 
                     @Override
                     public void onFail() {
-
+                        errorMessage.setVisibility(View.VISIBLE);
+                        errorMessage.setText("Email / Password is incorrect");
+                        return;
                     }
 
                 });
+
             }
         };
 

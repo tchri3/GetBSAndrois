@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import nati.aviran.getbs.model.Model;
@@ -21,6 +22,8 @@ import nati.aviran.getbs.model.BabySitter;
 //import nati.aviran.getbs.model.Student;
 
 import java.util.List;
+
+import static android.view.View.GONE;
 
 
 /**
@@ -33,6 +36,8 @@ import java.util.List;
  */
 public class BabySitterListFragment extends Fragment {
     ListView list;
+    ProgressBar progressBar;
+
     List<BabySitter> data;
     BabySitterListAdapter adapter;
 
@@ -75,7 +80,10 @@ public class BabySitterListFragment extends Fragment {
 
         View view=inflater.inflate(R.layout.fragment_babysitter_list, container, false);
       //  data = Model.instace.getAllBabySitters();
-        list = (ListView) view.findViewById(R.id.stlist_list);
+        list = (ListView) view.findViewById(R.id.list_list);
+
+        progressBar = (ProgressBar) view.findViewById(R.id.listProgressBar);
+        progressBar.setVisibility(View.VISIBLE);
         adapter = new BabySitterListAdapter();
 
 
@@ -99,7 +107,9 @@ public class BabySitterListFragment extends Fragment {
             @Override
             public void onComplete(List<BabySitter> list) {
                 data = list;
+                progressBar.setVisibility(GONE);
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override
