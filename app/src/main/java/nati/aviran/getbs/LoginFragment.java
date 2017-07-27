@@ -57,12 +57,13 @@ public class LoginFragment extends Fragment  {
 
     public void onPrepareOptionsMenu(Menu menu)
     {
-        MenuItem register = menu.findItem(R.id.main_logout).setVisible(false);
-        register.setVisible(false);
+        menu.findItem(R.id.main_logout).setVisible(false);
+        //register.setVisible(false);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
 
