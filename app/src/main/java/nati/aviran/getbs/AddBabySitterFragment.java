@@ -21,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import nati.aviran.getbs.Dialogs.AddBabySitterDialogFragment;
 import nati.aviran.getbs.model.BabySitter;
 import nati.aviran.getbs.model.Model;
@@ -116,16 +119,42 @@ public class AddBabySitterFragment extends Fragment  {
                 EditText phone= (EditText) v.findViewById(R.id.addBSitterPhoneTv);
                 EditText salary= (EditText) v.findViewById(R.id.addBSitterSalaryTv);
 
-                if((email.getText().toString().equals(""))||
-                        (password.getText().toString().equals(""))||
-                        (address.getText().toString().equals(""))||
-                        (age.getText().toString().equals("")) ||
-                        (availability.getText().toString().isEmpty()) ||
-                        (phone.getText().toString().isEmpty()) ||
-                        (salary.getText().toString().isEmpty()) ||
-                        (name.getText().toString().isEmpty() ) )
+                Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+                Matcher mat = pattern.matcher(email.getText().toString());
+
+                // Error message
+                String errorMessage = "";
+
+                // Check if there is an error
+                if(email.getText().toString().equals("") || (!mat.matches())) {
+                    errorMessage = "must specify valid email";
+                }
+                else if (password.getText().toString().equals("")){
+                    errorMessage = "password can't be empty";
+                }
+                else if (address.getText().toString().equals("")){
+                    errorMessage = "address can't be empty";
+                }
+                else if (age.getText().toString().equals("") || (!age.getText().toString().matches("-?\\d+(\\.\\d+)?"))){
+                    errorMessage = "must specify valid age";
+                }
+                else if (availability.getText().toString().isEmpty()){
+                    errorMessage = "availability can't be empty";
+                }
+                else if (phone.getText().toString().equals("")){
+                    errorMessage = "phone can't be empty";
+                }
+                else if (salary.getText().toString().equals("")){
+                    errorMessage = "salary can't be empty";
+                }
+                else if (name.getText().toString().equals("")){
+                    errorMessage = "name can't be empty";
+                }
+
+                // If there is an error
+                if (errorMessage != "")
                 {
-                    ((TextView) v.findViewById(R.id.errorMessage)).setText("there is empty value");
+                    ((TextView) v.findViewById(R.id.errorMessage)).setText(errorMessage);
                     return;
                 }else {
 
