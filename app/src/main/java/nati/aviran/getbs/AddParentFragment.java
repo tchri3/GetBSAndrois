@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import nati.aviran.getbs.Dialogs.AddBabySitterDialogFragment;
 import nati.aviran.getbs.Dialogs.AddParentDialogFragment;
 import nati.aviran.getbs.model.Model;
@@ -93,12 +96,30 @@ public class AddParentFragment extends Fragment  {
                 EditText address = (EditText) v.findViewById(R.id.addParentAddressTv);
                 EditText name= (EditText) v.findViewById(R.id.addParentNameTv);
 
-                if((email.getText().toString().equals(""))||
-                        (password.getText().toString().equals(""))||
-                        (address.getText().toString().equals(""))||
-                        (name.getText().toString().isEmpty() ) )
+                Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+                Matcher mat = pattern.matcher(email.getText().toString());
+
+                // Error message
+                String errorMessage = "";
+
+                // Check if there is an error
+                if(email.getText().toString().equals("") || (!mat.matches())) {
+                    errorMessage = "must specify valid email";
+                }
+                else if (password.getText().toString().equals("") || password.getText().toString().length() < 6){
+                    errorMessage = "password must be 6 characters or more";
+                }
+                else if (name.getText().toString().equals("")){
+                    errorMessage = "name can't be empty";
+                }
+                else if (address.getText().toString().equals("")){
+                    errorMessage = "address can't be empty";
+                }
+
+                // If there is an error
+                if (errorMessage != "")
                 {
-                    ((TextView) v.findViewById(R.id.errorMessage)).setText("there is empty value");
+                    ((TextView) v.findViewById(R.id.errorMessage)).setText(errorMessage);
                     return;
                 }else {
 
