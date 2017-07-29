@@ -129,8 +129,8 @@ public class AddBabySitterFragment extends Fragment  {
                 if(email.getText().toString().equals("") || (!mat.matches())) {
                     errorMessage = "must specify valid email";
                 }
-                else if (password.getText().toString().equals("")){
-                    errorMessage = "password can't be empty";
+                else if (password.getText().toString().equals("") || password.getText().toString().length() < 6){
+                    errorMessage = "password must be 6 characterss or more";
                 }
                 else if (address.getText().toString().equals("")){
                     errorMessage = "address can't be empty";

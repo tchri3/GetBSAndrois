@@ -264,6 +264,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
+                android:textColor="@color/colorAccent"
                 android:text=""
                 android:textSize="15sp" />
 
