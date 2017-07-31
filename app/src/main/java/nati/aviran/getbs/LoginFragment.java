@@ -94,6 +94,8 @@ public class LoginFragment extends Fragment  {
                 if((email.getText().toString().equals(""))||(password.getText().toString().equals("")) ) {
                     errorMessage.setVisibility(View.VISIBLE);
                     errorMessage.setText("You cannot leave any value empty");
+
+                    Log.d("TAG","Error login");
                     return;
                 }
 
@@ -102,7 +104,7 @@ public class LoginFragment extends Fragment  {
                 {
                     @Override
                     public void onSuccess() {
-
+                        Log.d("TAG","login");
                         mListener.onFragmentInteraction(true);
                     }
 
@@ -110,6 +112,8 @@ public class LoginFragment extends Fragment  {
                     public void onFail() {
                         errorMessage.setVisibility(View.VISIBLE);
                         errorMessage.setText("Email / Password is incorrect");
+
+                        Log.d("TAG","failed login");
                         return;
                     }
 

@@ -155,6 +155,7 @@ public class AddBabySitterFragment extends Fragment  {
                 if (errorMessage != "")
                 {
                     ((TextView) v.findViewById(R.id.errorMessage)).setText(errorMessage);
+                    Log.d("TAG","error add babysitter");
                     return;
                 }else {
 
