@@ -120,6 +120,8 @@ public class AddParentFragment extends Fragment  {
                 if (errorMessage != "")
                 {
                     ((TextView) v.findViewById(R.id.errorMessage)).setText(errorMessage);
+
+                    Log.d("TAG","error add parent");
                     return;
                 }else {
 
