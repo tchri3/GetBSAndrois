@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
 import nati.aviran.getbs.Dialogs.AddBabySitterDialogFragment;
 import nati.aviran.getbs.model.BabySitter;
 import nati.aviran.getbs.model.Model;
-import nati.aviran.getbs.model.Student;
 
 import static android.view.View.GONE;
 
@@ -48,10 +47,9 @@ public class AddBabySitterFragment extends Fragment  {
 
     ImageView imageView;
     Bitmap imageBitmap;
-    ProgressBar progressBar;
 
 
-    //private static final
+    // private static final
 
     private OnFragmentInteractionListener mListener;
 
@@ -75,27 +73,27 @@ public class AddBabySitterFragment extends Fragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // get view and buttons in the view
         final View v =inflater.inflate(R.layout.fragment_add_babysitter, container, false);
         Button add= (Button)v.findViewById(R.id.addBSitterAddbtn);
-        Button cel=(Button)v.findViewById(R.id.addBSitterCancelbtn);
+        Button cancel=(Button)v.findViewById(R.id.addBSitterCancelbtn);
 
-
-        cel.setOnClickListener(new View.OnClickListener() {
+        // set cancel btn event click
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onFragmentInteraction(false);
                 return;
             }
         });
-
+        // get image
         imageView = (ImageView)v.findViewById(R.id.bsImageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +106,6 @@ public class AddBabySitterFragment extends Fragment  {
         View.OnClickListener click = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 EditText email= (EditText) v.findViewById(R.id.addBSitterEmailTv);
                 EditText password= (EditText) v.findViewById(R.id.addBSitterPasswordTv);
@@ -209,19 +206,11 @@ public class AddBabySitterFragment extends Fragment  {
     {
        MenuItem register = menu.findItem(R.id.main_logout).setVisible(false);
          register.setVisible(false);
-
-       //  getActionBar().setDisplayHomeAsUpEnabled(true);
-      //  menu.findItem(R.id.main_add).setVisible(false);
-       /// getActionBar().setDisplayHomeAsUpEnabled(true);
-
-       // register.setVisible(true);
-        // getActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      //  MainActivity.CurrentFragment="Add";
-        Log.d("TAG","MainActivity attach");
+     Log.d("TAG","MainActivity attach");
 
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;

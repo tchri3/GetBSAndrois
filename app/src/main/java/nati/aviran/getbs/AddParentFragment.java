@@ -152,8 +152,7 @@ public class AddParentFragment extends Fragment  {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      //  MainActivity.CurrentFragment="Add";
-        Log.d("TAG","MainActivity attach");
+      Log.d("TAG","MainActivity attach");
 
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;

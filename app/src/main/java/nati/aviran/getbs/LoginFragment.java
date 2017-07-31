@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import nati.aviran.getbs.model.Model;
-import nati.aviran.getbs.model.Student;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,8 +57,7 @@ public class LoginFragment extends Fragment  {
     public void onPrepareOptionsMenu(Menu menu)
     {
         menu.findItem(R.id.main_logout).setVisible(false);
-        //register.setVisible(false);
-    }
+   }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,7 +119,7 @@ public class LoginFragment extends Fragment  {
         View.OnClickListener signupBSClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  mListener.onFragmentInteraction(1);
+
                 mListener.onFragmentInteractionSignUp(true);
             }
         };
@@ -129,7 +127,7 @@ public class LoginFragment extends Fragment  {
         View.OnClickListener signupParentClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  mListener.onFragmentInteraction(1);
+
                 mListener.onFragmentInteractionSignUp(false);
             }
         };

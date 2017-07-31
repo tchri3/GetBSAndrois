@@ -104,12 +104,10 @@ public class ModelFirebase {
                         if(task.isSuccessful()) {
                             callback.onSuccess();
                         }
-                        else
-                        {
-                            callback.onFail();
-                        }
                     }
                 });
+
+
 
     }
 

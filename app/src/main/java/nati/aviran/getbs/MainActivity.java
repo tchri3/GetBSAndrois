@@ -8,14 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-import nati.aviran.getbs.model.Student;
-
-
 public class MainActivity extends Activity
         implements AddParentFragment.OnFragmentInteractionListener, BabySitterListFragment.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener,AddBabySitterFragment.OnFragmentInteractionListener ,BabySitterDetailsFragment.OnFragmentInteractionListener{
     public static  String CurrentFragment;
-
-    //  FragmentTransaction tran =  getFragmentManager().beginTransaction();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +18,12 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
         Log.d("TAG","MainActivity onCreate");
         FragmentTransaction tran =  getFragmentManager().beginTransaction();
-       // CurrentFragment = "List";
-       // BabySitterListFragment listFragment = BabySitterListFragment.newInstance();
-       // tran.add(R.id.main_container, listFragment);
 
         CurrentFragment = "login";
         LoginFragment loginFragment = LoginFragment.newInstance();
         tran.add(R.id.main_container, loginFragment);
         tran.commit();
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+   }
 
 
     @Override
@@ -52,8 +43,7 @@ public class MainActivity extends Activity
                 FragmentTransaction tran = getFragmentManager().beginTransaction();
                 tran.replace(R.id.main_container, loginFragment);
                 tran.commit();
-                getActionBar().setDisplayHomeAsUpEnabled(true);
-                break;
+               break;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -61,10 +51,7 @@ public class MainActivity extends Activity
     }
 
 
-
-
-
-
+    // show bs details of bs by email
     @Override
     public void onFragmentInteraction(String email) {
         this.CurrentFragment="BabySitterDetails";
@@ -72,15 +59,12 @@ public class MainActivity extends Activity
         FragmentTransaction tran = getFragmentManager().beginTransaction();
         tran.replace(R.id.main_container, babySitterDetailsFragment);
         tran.addToBackStack("");
-        // CurrentFragment="Details";
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         tran.commit();
 
     }
 
 
-
+    // if false login list view if true show list view
     @Override
     public void onFragmentInteraction(boolean bool) {
         Log.d("TAG","onFragmentInteraction login ");
@@ -91,7 +75,6 @@ public class MainActivity extends Activity
             FragmentTransaction tran = getFragmentManager().beginTransaction();
             tran.replace(R.id.main_container, loginFragment);
             tran.commit();
-            getActionBar().setDisplayHomeAsUpEnabled(true);
 
         }
         else
@@ -101,15 +84,11 @@ public class MainActivity extends Activity
             FragmentTransaction tran = getFragmentManager().beginTransaction() ;
             tran.replace(R.id.main_container,listFragment);
             tran.commit();
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+    }
     }
 
-  /*  @Override
-    public void onFragmentInteraction(Student str) {
 
-    }*/
-
+    // if is bs show add bs view else show add parent view
 @Override
     public void onFragmentInteractionSignUp(boolean isBs) {
     if(isBs)
@@ -131,8 +110,6 @@ public class MainActivity extends Activity
         tran.commit();
 
     }
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
 
     }
 }

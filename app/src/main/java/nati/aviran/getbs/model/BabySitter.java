@@ -12,7 +12,5 @@ public class BabySitter {
     public String salary;
     public String age;
     public String availability;
-
-
     public double lastUpdateDate;
 }

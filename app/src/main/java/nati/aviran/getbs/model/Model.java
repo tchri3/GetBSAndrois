@@ -16,85 +16,30 @@ import java.util.List;
 
 public class Model {
 
+    // instance model
     public final static Model instace = new Model();
 
-    //private ModelMem modelMem;
+    //  variables
     private ModelSql modelSql;
     private ModelFirebase modelFirebase;
 
-
-
+    // ctor
     private Model(){
 
-        // modelMem = new ModelMem();
         modelSql = new ModelSql(MyApp.getMyContext());
         modelFirebase = new ModelFirebase();
 
-
-     /*   for(int i=0;i<2;i++){
-            Student st = new Student();
-            st.name = "kuku" + i;
-            st.id = "" + i * 17;
-            st.checked = false;
-            st.imageUrl = "";
-            st.phone=""+"052-"+i;
-            st.address="rishon"+i;
-            st.time = "16:49";
-            st.date = "1/1/2000";
-            data.add(st);
-        }
-        */
     }
 
-
-
-
-
     public void addParent(Parent p) {
-        //StudentSql.addStudent(modelSql.getWritableDatabase(),st);
         modelFirebase.addParent(p);
     }
 
     public void addBabySitter(BabySitter bs) {
-      //  BabySitterSql.addBabySitter(modelSql.getWritableDatabase(),bs);
           modelFirebase.addBabySitter(bs);
     }
 
-    public void addStudent(Student st) {
-        //StudentSql.addStudent(modelSql.getWritableDatabase(),st);
-      //  modelFirebase.addStudent(st);
-    }
-
-/*
-
-    private List<Student> data = new LinkedList<Student>();
-
-    public List<Student> getAllStudents(){
-        return data;
-    }
-
-
-    public  void deleteStudent(Student st){data.remove(st); }
-
-    public Student getStudent(String stId) {
-        for (Student s : data){
-            if (s.id.equals(stId)){
-                return s;
-            }
-        }
-        return null;
-    }
-    public boolean checkIfIdExists(String id )
-    {
-        for (Student s : data){
-            if (s.id.equals(id)){
-                return true;
-            }
-        }
-        return false;
-    }
-*/
-
+    // login callback
     public interface GetLoginCallback {
         void onSuccess();
         void onFail();
@@ -118,7 +63,7 @@ public class Model {
         });
 
     }
-
+    // Get Baby Sitter Callback
     public interface GetBabySitterCallback {
         void onComplete(BabySitter bs);
 
@@ -142,13 +87,15 @@ public class Model {
     }
 
 
-
+//Get All BabySitters And ObserveCallback
     public interface GetAllBabySittersAndObserveCallback {
         void onComplete(List<BabySitter> list);
         void onCancel();
     }
 
     public void getAllBabySittersAndObserve(final GetAllBabySittersAndObserveCallback callback) {
+        
+
         //1. get local lastUpdateDate
         SharedPreferences pref = MyApp.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
         final double lastUpdateDate = pref.getFloat("BabySittersLastUpdateDate",0);
@@ -165,7 +112,7 @@ public class Model {
                 for (BabySitter bs: list) {
                     //3. update the local db
                     BabySitterSql.addBabySitter(modelSql.getWritableDatabase(),bs);
-                    //4. update the lastUpdateTade
+                    //4. update the lastUpdateDate
                     if (newLastUpdateDate < bs.lastUpdateDate){
                         newLastUpdateDate = bs.lastUpdateDate;
                     }
@@ -177,11 +124,10 @@ public class Model {
                 prefEd.commit();
                 Log.d("TAG","BabySittersLastUpdateDate: " + newLastUpdateDate);
 
-
                 //5. read from local db
                 List<BabySitter> data = BabySitterSql.getAllBabySitters(modelSql.getReadableDatabase());
 
-                //6. return list of students
+                //6. return list of baby sitter
                 callback.onComplete(data);
 
             }
@@ -194,9 +140,6 @@ public class Model {
 
 
     }
-
-
-
 
     public interface SaveImageListener {
         void complete(String url);

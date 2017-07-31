@@ -79,20 +79,14 @@ public class BabySitterListFragment extends Fragment {
         MainActivity.CurrentFragment="List";
 
         View view=inflater.inflate(R.layout.fragment_babysitter_list, container, false);
-      //  data = Model.instace.getAllBabySitters();
-        list = (ListView) view.findViewById(R.id.list_list);
+      list = (ListView) view.findViewById(R.id.list_list);
 
         progressBar = (ProgressBar) view.findViewById(R.id.listProgressBar);
         progressBar.setVisibility(View.VISIBLE);
         adapter = new BabySitterListAdapter();
 
 
-
-
         list.setAdapter(adapter);
-
-
-
 
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -118,11 +112,6 @@ public class BabySitterListFragment extends Fragment {
             }
         });
 
-/*
-        data = Model.instace.getAllSql();
-       adapter.notifyDataSetChanged();
-
-*/
 
         return view;
     }
@@ -206,9 +195,7 @@ public class BabySitterListFragment extends Fragment {
         public View getView(final int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.babysitter_list_row, null);
-               // CheckBox cb = (CheckBox) convertView.findViewById(R.id.strow_cb);
-               // cb.setOnClickListener(listener);
-            }
+    }
 
             TextView name = (TextView) convertView.findViewById(R.id.strow_name);
             TextView age = (TextView) convertView.findViewById(R.id.strow_age);
@@ -226,12 +213,7 @@ public class BabySitterListFragment extends Fragment {
                 Model.instace.getImage(bs.imageUrl, new Model.GetImageListener() {
                     @Override
                     public void onSuccess(Bitmap image) {
-                      //  if(imageView.getTag() != null) {
-                          //  String tagUrl = imageView.getTag().toString();
-                          //  if (tagUrl.equals(bs.imageUrl)) {
                                 imageView.setImageBitmap(image);
-                        //    }
-                       // }
                     }
 
                     @Override

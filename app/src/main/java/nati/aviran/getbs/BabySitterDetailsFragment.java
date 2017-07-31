@@ -30,7 +30,7 @@ import nati.aviran.getbs.model.BabySitter;
  */
 public class BabySitterDetailsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // the fragment initialization parameters, e.g.
     private static final String EMAIL = "email";
 
     // TODO: Rename and change types of parameters
@@ -73,20 +73,6 @@ public class BabySitterDetailsFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      /*  if (item.getItemId() == R.id.main_edit) {
-            MainActivity.CurrentFragment="Edit";
-            //String id = ((TextView) findViewById(R.id.detId)).toString();
-            AddBabySitterFragment s = AddBabySitterFragment.newInstance();
-            ;
-            FragmentTransaction tran3 = getFragmentManager().beginTransaction();
-            tran3.replace(R.id.main_container, s);
-            tran3.addToBackStack("");
-            tran3.commit();
-            //getActionBar().setDisplayHomeAsUpEnabled(true);
-            //break;
-
-        }
-        */
         return true;
     }
 
@@ -97,7 +83,6 @@ public class BabySitterDetailsFragment extends Fragment {
         MainActivity.CurrentFragment="BabySitterDetails";
 
         View view =inflater.inflate(R.layout.fragment_babysitter_details, container, false);
-
 
         final TextView name= (TextView)view.findViewById((R.id.detailsName));
         final TextView phone= (TextView)view.findViewById(R.id.detailsPhoneTv);
@@ -154,13 +139,6 @@ public class BabySitterDetailsFragment extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-   /* public void onButtonPressed(Student str) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(null);
-        }
-    }*/
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -202,17 +180,10 @@ public class BabySitterDetailsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-      //  void onFragmentInteraction(Student str);
-    }
+  }
     public void onPrepareOptionsMenu(Menu menu)
     {
-      //  MenuItem register = menu.findItem(R.id.main_edit);
-     //   menu.findItem(R.id.main_add).setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
-       //getActionBar().setDisplayHomeAsUpEnabled(true);
-
-       // register.setVisible(true);
-       // getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }

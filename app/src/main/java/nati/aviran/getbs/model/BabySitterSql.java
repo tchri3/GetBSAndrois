@@ -79,9 +79,6 @@ public class BabySitterSql {
         db.insert(BS_TABLE, BS_EMAIL, values);
     }
 
-    static Student getBabySitter(SQLiteDatabase db, String bsEmail) {
-        return null;
-    }
 
     static public void onCreate(SQLiteDatabase db) {
         String sql = "create table " + BS_TABLE +
