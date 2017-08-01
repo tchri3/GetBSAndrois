@@ -166,11 +166,13 @@ public class AddBabySitterFragment extends Fragment  {
                     New.age = age.getText().toString();
                     New.availability = availability.getText().toString();
 
-
+                    // add image file and save url image if exist image
                     if (imageBitmap != null) {
                         Model.instace.saveImage(imageBitmap, New.email + ".jpeg", new Model.SaveImageListener() {
                             @Override
                             public void complete(String url) {
+
+                                // add bs with the url image
                                 New.imageUrl = url;
                                 Model.instace.addBabySitter(New);
                                 DialogFragment dialog = new AddBabySitterDialogFragment();
@@ -185,6 +187,8 @@ public class AddBabySitterFragment extends Fragment  {
                             }
                         });
                     }else{
+
+                        // add bs
                         Model.instace.addBabySitter(New);
                         DialogFragment dialog = new AddBabySitterDialogFragment();
                         dialog.show(getFragmentManager(), "TAG");

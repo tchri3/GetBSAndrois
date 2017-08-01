@@ -47,13 +47,12 @@ import nati.aviran.getbs.LoginFragment;
 import nati.aviran.getbs.MainActivity;
 
 /**
- * Created by nati2 on 29/06/2017.
+ * Created by aviran.nati on 01/07/2017.
  */
 
 public class ModelFirebase {
 
-    boolean isConnect;
-
+  // add bs to fire base
     public void addBabySitter(BabySitter babySitter) {
 
         final BabySitter bs = babySitter;
@@ -94,6 +93,7 @@ public class ModelFirebase {
         void onFail();
     }
 
+    // login to fire base
     public void login(String email,String password,final GetLoginCallback callback) {
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -111,7 +111,7 @@ public class ModelFirebase {
 
     }
 
-
+// add parent to fire base
         public void addParent(Parent parent) {
 
         final Parent p = parent;
@@ -136,6 +136,7 @@ public class ModelFirebase {
                 });
     }
 
+    // change email - from points to , - because fire base child cant fill points
     static String encodeUserEmail(String userEmail) {
         return userEmail.replace(".", ",");
     }
@@ -150,6 +151,7 @@ public class ModelFirebase {
         void onCancel();
     }
 
+    // get bs by email from fire base
     public void getBabySitter(String email, final GetBabySitterCallback callback) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("babySitter");
@@ -173,6 +175,7 @@ public class ModelFirebase {
         void onComplete(List<BabySitter> list);
         void onCancel();
     }
+
     public void getAllBabySittersAndObserve(final GetAllBabySittersAndObserveCallback callback) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("babySitter");
@@ -195,7 +198,7 @@ public class ModelFirebase {
         });
     }
 
-
+    // get bs and observe on last update
     public void getAllBabySittersAndObserve(double lastUpdateDate,
                                          final GetAllBabySittersAndObserveCallback callback) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -266,14 +269,5 @@ public class ModelFirebase {
             }
         });
     }
-
-
-
-
-
-
-
-
-
 
 }

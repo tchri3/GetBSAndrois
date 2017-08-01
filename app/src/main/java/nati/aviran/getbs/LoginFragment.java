@@ -75,20 +75,22 @@ public class LoginFragment extends Fragment  {
 
         final View v =inflater.inflate(R.layout.fragment_login, container, false);
 
-
         final EditText email= (EditText) v.findViewById(R.id.loginEmailTv);
         final EditText password= (EditText) v.findViewById(R.id.loginPasswordTv);
 
+        // get buttons
         Button signin= (Button)v.findViewById(R.id.loginInBtn);
         Button signupBS= (Button)v.findViewById(R.id.loginSignupBabysitterBtn);
         Button signupParent= (Button)v.findViewById(R.id.loginSignupParentBtn);
 
+        // add click event for buttons
         View.OnClickListener click = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final TextView errorMessage = ((TextView) v.findViewById(R.id.loginError));
                 errorMessage.setVisibility(View.GONE);
 
+                // check validation
                 if((email.getText().toString().equals(""))||(password.getText().toString().equals("")) ) {
                     errorMessage.setVisibility(View.VISIBLE);
                     errorMessage.setText("You cannot leave any value empty");
@@ -97,17 +99,19 @@ public class LoginFragment extends Fragment  {
                     return;
                 }
 
-
+                // model login
                 Model.instace.login(email.getText().toString(),password.getText().toString() , new Model.GetLoginCallback()
                 {
                     @Override
                     public void onSuccess() {
                         Log.d("TAG","login");
+                        // go to list view
                         mListener.onFragmentInteraction(true);
                     }
 
                     @Override
                     public void onFail() {
+                        // show error
                         errorMessage.setVisibility(View.VISIBLE);
                         errorMessage.setText("Email / Password is incorrect");
 
@@ -124,6 +128,7 @@ public class LoginFragment extends Fragment  {
             @Override
             public void onClick(View view) {
 
+                // show bs view add
                 mListener.onFragmentInteractionSignUp(true);
             }
         };
@@ -132,10 +137,12 @@ public class LoginFragment extends Fragment  {
             @Override
             public void onClick(View view) {
 
+                // show add parent view
                 mListener.onFragmentInteractionSignUp(false);
             }
         };
 
+        // add click event for buttons
         signupBS.setOnClickListener(signupBSClick);
         signupParent.setOnClickListener(signupParentClick);
         signin.setOnClickListener(click);

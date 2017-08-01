@@ -9,9 +9,8 @@ import android.os.Bundle;
 import nati.aviran.getbs.R;
 
 /**
- * Created by goldav on 24/05/2017.
+ * Created by aviran.nati on 01/07/2017.
  */
-
 public class AddParentDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -19,8 +19,6 @@ import nati.aviran.getbs.model.Model;
 import nati.aviran.getbs.model.BabySitter;
 
 
-//import nati.aviran.getbs.model.Student;
-
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -79,12 +77,11 @@ public class BabySitterListFragment extends Fragment {
         MainActivity.CurrentFragment="List";
 
         View view=inflater.inflate(R.layout.fragment_babysitter_list, container, false);
-      list = (ListView) view.findViewById(R.id.list_list);
+        list = (ListView) view.findViewById(R.id.list_list);
 
         progressBar = (ProgressBar) view.findViewById(R.id.listProgressBar);
         progressBar.setVisibility(View.VISIBLE);
         adapter = new BabySitterListAdapter();
-
 
         list.setAdapter(adapter);
 
@@ -96,10 +93,11 @@ public class BabySitterListFragment extends Fragment {
             }
         });
 
-
+// get data for list
         Model.instace.getAllBabySittersAndObserve(new Model.GetAllBabySittersAndObserveCallback() {
             @Override
             public void onComplete(List<BabySitter> list) {
+                // set date and hide progress bar
                 data = list;
                 progressBar.setVisibility(GONE);
                 adapter.notifyDataSetChanged();
@@ -195,8 +193,9 @@ public class BabySitterListFragment extends Fragment {
         public View getView(final int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.babysitter_list_row, null);
-    }
+            }
 
+            // set rows - fill in data details
             TextView name = (TextView) convertView.findViewById(R.id.strow_name);
             TextView age = (TextView) convertView.findViewById(R.id.strow_age);
             TextView salary = (TextView) convertView.findViewById(R.id.strow_salary);
@@ -208,6 +207,7 @@ public class BabySitterListFragment extends Fragment {
 
             final ImageView imageView = (ImageView) convertView.findViewById(R.id.strow_image);
 
+            // if image exist show image
             if (bs.imageUrl != null && !bs.imageUrl.isEmpty() && !bs.imageUrl.equals("")){
 
                 Model.instace.getImage(bs.imageUrl, new Model.GetImageListener() {

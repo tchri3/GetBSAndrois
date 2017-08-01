@@ -83,7 +83,7 @@ public class BabySitterDetailsFragment extends Fragment {
         MainActivity.CurrentFragment="BabySitterDetails";
 
         View view =inflater.inflate(R.layout.fragment_babysitter_details, container, false);
-
+// get elements
         final TextView name= (TextView)view.findViewById((R.id.detailsName));
         final TextView phone= (TextView)view.findViewById(R.id.detailsPhoneTv);
         final TextView address= (TextView)view.findViewById(R.id.detailsAddressTv);
@@ -92,6 +92,7 @@ public class BabySitterDetailsFragment extends Fragment {
         final TextView availability =(TextView) view.findViewById(R.id.detailsAvailabilityTv);
         final ImageView imageView = (ImageView) view.findViewById(R.id.detailsImageView);
 
+        // get the current bs details
         Model.instace.getBabySitter(email, new Model.GetBabySitterCallback() {
             @Override
             public void onComplete(BabySitter bs) {
@@ -105,7 +106,7 @@ public class BabySitterDetailsFragment extends Fragment {
                 availability.setText(bs.availability);
                 address.setText(bs.address);
 
-
+                // get if exist the image file of bs
                 if (bs.imageUrl != null && !bs.imageUrl.isEmpty() && !bs.imageUrl.equals("")){
 
                     Model.instace.getImage(bs.imageUrl, new Model.GetImageListener() {
